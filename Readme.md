@@ -1,7 +1,7 @@
 # Личный проект «Кексобукинг» [![Build status][travis-image]][travis-url]
 
 * Студент: [Артем Диков](https://up.htmlacademy.ru/javascript/12/user/559069).
-* Наставник: `Неизвестно`.
+* Наставник: [Ренат Туктаров].
 
 ---
 
