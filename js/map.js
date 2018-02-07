@@ -48,7 +48,7 @@ var ads = Array(8).fill({
 var randomAvatar = AVATARS.slice().sort(sortRandom);
 var randomTitle = TITLES.slice().sort(sortRandom);
 
-ads = ads.map (function (_, i) {  
+ads = ads.map(function (_, i) {
   ads[i] = {
     author: {avatar: randomAvatar[i]},
     offer: {
@@ -61,16 +61,16 @@ ads = ads.map (function (_, i) {
       checkin: getRandomData(CHECKIN_TIME),
       checkout: getRandomData(CHECKOUT_TIME),
       features: ALL_FEATURES.slice().sort(sortRandom).splice(0,
-        getRandomNumber(0, ALL_FEATURES.length)),
+          getRandomNumber(0, ALL_FEATURES.length)),
       description: '',
-      photos: ALL_PHOTOS.slice().sort(sortRandom)      
+      photos: ALL_PHOTOS.slice().sort(sortRandom)
     },
     location: {
       x: getRandomNumber(MIN_X, MAX_X),
       y: getRandomNumber(MIN_Y, MAX_Y)
     }
   };
-  return ads[i];  
+  return ads[i];
 });
 
 var mapParent = document.querySelector('.map');
@@ -81,19 +81,19 @@ var renderPin = function (pin) {
   pinElement.className = 'map__pin';
   pinElement.style.left = pin.location.x + 'px';
   pinElement.style.top = pin.location.y + 'px';
-  
+
   var imgElement = document.createElement('img');
   imgElement.src = pin.author.avatar;
   imgElement.style.width = 40 + 'px';
   imgElement.style.height = 40 + 'px';
   imgElement.draggable = 'false';
   pinElement.appendChild(imgElement);
-  return pinElement;  
+  return pinElement;
 };
 
 var fillMapPins = function (list) {
   var fragment = document.createDocumentFragment();
-  for (i = 0; i < ads.length; i++) {
+  for (var i = 0; i < ads.length; i++) {
     fragment.appendChild(renderPin(ads[i]));
   }
   return list.appendChild(fragment);
