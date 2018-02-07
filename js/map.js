@@ -33,23 +33,23 @@ var getRandomData = function (arr) {
 };
 
 var getRandomNumber = function (from, to) {
-  return Math.floor(Math.random() * (to-from+1) + from);
+  return Math.floor(Math.random() * (to - from + 1) + from);
 };
 
-var sortRandom = function (a,b){
-  return Math.random()-0.5;
+var sortRandom = function (a, b) {
+  return Math.random() - 0.5;
 };
 
 var ads = Array(8).fill({
-  author: "",
-  offer: "",
-  location: ""
+  author: '',
+  offer: '',
+  location: ''
 });
 var randomAvatar = AVATARS.slice().sort(sortRandom);
 var randomTitle = TITLES.slice().sort(sortRandom);
 
-ads = ads.map(function(_, i) {  
-  return ads[i] = {
+ads = ads.map (function (_, i) {  
+  ads[i] = {
     author: {avatar: randomAvatar[i]},
     offer: {
       title: randomTitle[i],
@@ -69,7 +69,8 @@ ads = ads.map(function(_, i) {
       x: getRandomNumber(MIN_X, MAX_X),
       y: getRandomNumber(MIN_Y, MAX_Y)
     }
-  };  
+  };
+  return ads[i];  
 });
 
 var mapParent = document.querySelector('.map');
