@@ -162,7 +162,7 @@ var renderMapCard = function (ad) {
   var mapCard = mapCardTemplate.cloneNode(true);
   mapCard.querySelector('h3').textContent = ad.offer.title;
   mapCard.querySelector('p small').textContent = ad.offer.address;
-  mapCard.querySelector('.popup__price').textContent = ad.offer.price + '&#x20bd;/ночь';
+  mapCard.querySelector('.popup__price').textContent = ad.offer.price + '\u20bd/ночь';
   var apartmentType;
   if (ad.offer.type === 'flat') {
     apartmentType = 'Квартира';
