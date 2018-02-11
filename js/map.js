@@ -148,22 +148,18 @@ var fillPhotoList = function (list, ad) {
     var photoItem = document.createElement('li');
     var imgElement = document.createElement('img');
     imgElement.src = ad.offer.photos[i];
-    imgElement.style.width = '100%';
+    imgElement.style.width = Math.floor(100 / ad.offer.photos.length) + '%';
     imgElement.style.height = 'auto';
     photoItem.appendChild(imgElement);
+    photoItem.style.display = 'inline';
     fragment.appendChild(photoItem);
   }
   return list.appendChild(fragment);
 };
 
-var mapCardTemplate = document.querySelector('template').content.querySelector('.map__card');
-
-var renderMapCard = function (ad) {
-  var mapCard = mapCardTemplate.cloneNode(true);
-  mapCard.querySelector('h3').textContent = ad.offer.title;
-  mapCard.querySelector('p small').textContent = ad.offer.address;
-  mapCard.querySelector('.popup__price').textContent = ad.offer.price + '\u20bd/ночь';
+var getApartmentType = function (ad) {
   var apartmentType;
+
   if (ad.offer.type === 'flat') {
     apartmentType = 'Квартира';
   } else if (ad.offer.type === 'house') {
@@ -173,9 +169,22 @@ var renderMapCard = function (ad) {
   } else {
     apartmentType = 'Тип неизвестен';
   }
-  mapCard.querySelector('h4').textContent = apartmentType;
-  mapCard.querySelector('h4 + p').textContent = ad.offer.rooms + ' комнаты для ' + ad.offer.guests + ' гостей';
-  mapCard.querySelector('h4 + p + p').textContent = 'Заезд после ' + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
+
+  return apartmentType;
+};
+
+var mapCardTemplate = document.querySelector('template').content.querySelector('.map__card');
+
+var renderMapCard = function (ad) {
+  var mapCard = mapCardTemplate.cloneNode(true);
+  mapCard.querySelector('h3').textContent = ad.offer.title;
+  mapCard.querySelector('p small').textContent = ad.offer.address;
+  mapCard.querySelector('.popup__price').textContent = ad.offer.price + '\u20bd/ночь';
+  mapCard.querySelector('h4').textContent = getApartmentType(ad);
+  mapCard.querySelector('h4 + p').textContent = ad.offer.rooms +
+      ' комнаты для ' + ad.offer.guests + ' гостей';
+  mapCard.querySelector('h4 + p + p').textContent = 'Заезд после '
+      + ad.offer.checkin + ', выезд до ' + ad.offer.checkout;
   fillFeatureList(mapCard.querySelector('.popup__features'), ad);
   mapCard.querySelector('.popup__features + p').textContent = ad.offer.description;
   fillPhotoList(mapCard.querySelector('.popup__pictures'), ad);
