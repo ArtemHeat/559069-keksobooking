@@ -52,10 +52,14 @@ window.configureNoticeForm = function () {
   var capacitySelect = noticeForm.querySelector('#capacity');
 
   var sayWrongCapacity = function () {
-    if (capacitySelect.value > roomNumberSelect.value
-      && capacitySelect.value !== '0' && roomNumberSelect.value !== '100'
-      || capacitySelect.value === '0' && roomNumberSelect.value !== '100'
-      || capacitySelect.value !== '0' && roomNumberSelect.value === '100') {
+    if (capacitySelect.value > roomNumberSelect.value &&
+      capacitySelect.value !== '0' &&
+      roomNumberSelect.value !== '100' ||
+      capacitySelect.value === '0' &&
+      roomNumberSelect.value !== '100' ||
+      capacitySelect.value !== '0' &&
+      roomNumberSelect.value === '100'
+    ) {
       capacitySelect.setCustomValidity('Минимальное количество мест 1.'
         + ' Максимальное количество мест равно количеству комнат.'
         + ' Для 100 комнат возможен один вариант - \"не для гостей\" ');
