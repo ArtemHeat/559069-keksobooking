@@ -11,7 +11,7 @@
 
     var mapSection = document.querySelector('.map');
 
-    if (~mapSection.className.indexOf('map--faded')) {
+    if (mapSection.className.indexOf('map--faded') !== -1) {
       mapSection.classList.remove('map--faded');
       document.querySelector('.notice__form').classList.remove('notice__form--disabled');
       var noticeFormFieldsets = document.querySelectorAll('.notice__form fieldset');
@@ -46,33 +46,28 @@
         y: moveEvt.clientY
       };
 
-      mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
-      mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+      mainPin.style.left =
+        moveEvt.clientX < 300 ? '300px' :
+        moveEvt.clientX > 900 ? '900px' :
+        (mainPin.offsetLeft - shift.x) + 'px';
+
+      mainPin.style.top =
+        moveEvt.clientY < 150 ? '150px' :
+        moveEvt.clientY > 500 ? '500px' :
+        (mainPin.offsetTop - shift.y) + 'px';
+
       document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
           + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
-
-      if (mainPin.offsetTop < 150 - mainPin.offsetHeight) {
-        mapSection.removeEventListener('mousemove', onMouseMove);
-        mainPin.style.top = 150 - mainPin.offsetHeight + 'px';
-        document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
-            + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
-
-      } else if (mainPin.offsetTop > 500 - mainPin.offsetHeight) {
-        mapSection.removeEventListener('mousemove', onMouseMove);
-        mainPin.style.top = 500 - mainPin.offsetHeight + 'px';
-        document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
-            + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
-      }
     };
 
     var onMouseUp = function (upEvt) {
       upEvt.preventDefault();
 
       mapSection.removeEventListener('mousemove', onMouseMove);
-      mapSection.removeEventListener('mouseup', onMouseUp);
+      document.removeEventListener('mouseup', onMouseUp);
     };
 
     mapSection.addEventListener('mousemove', onMouseMove);
-    mapSection.addEventListener('mouseup', onMouseUp);
+    document.addEventListener('mouseup', onMouseUp);
   });
 })();
