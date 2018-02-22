@@ -46,15 +46,21 @@
         y: moveEvt.clientY
       };
 
-      mainPin.style.left =
-        moveEvt.clientX < 300 ? '300px' :
-        moveEvt.clientX > 900 ? '900px' :
-        (mainPin.offsetLeft - shift.x) + 'px';
+      if (moveEvt.clientX < 300) {
+        mainPin.style.left = '300px';
+      } else if (moveEvt.clientX > 900) {
+        mainPin.style.left = '900px';
+      } else {
+        mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+      }
 
-      mainPin.style.top =
-        moveEvt.clientY < 150 ? '150px' :
-        moveEvt.clientY > 500 ? '500px' :
-        (mainPin.offsetTop - shift.y) + 'px';
+      if (moveEvt.clientY < 150) {
+        mainPin.style.top = '150px';
+      } else if (moveEvt.clientY > 500) {
+        mainPin.style.top = '500px';
+      } else {
+        mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
+      }
 
       document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
           + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
