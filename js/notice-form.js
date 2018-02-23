@@ -19,7 +19,7 @@ window.configureNoticeForm = function () {
 
     var noticeFormFieldsets = document.querySelectorAll('.notice__form fieldset');
 
-    for (var i = 0; i < noticeFormFieldsets.length; i++) {
+    for (i = 0; i < noticeFormFieldsets.length; i++) {
       noticeFormFieldsets[i].disabled = true;
     }
 
