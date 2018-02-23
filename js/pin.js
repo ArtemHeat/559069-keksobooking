@@ -18,12 +18,12 @@
     return pin.addEventListener('click', onPinClick);
   };
 
-  window.fillMapPins = function (list) {
+  window.fillMapPins = function (list, ads) {
     var fragment = document.createDocumentFragment();
     var pin;
-    for (var i = 0; i < window.ads.length; i++) {
-      pin = renderPin(window.ads[i]);
-      setupPinHandler(pin, window.ads[i]);
+    for (var i = 0; i < ads.length; i++) {
+      pin = renderPin(ads[i]);
+      setupPinHandler(pin, ads[i]);
       fragment.appendChild(pin);
     }
     return list.appendChild(fragment);

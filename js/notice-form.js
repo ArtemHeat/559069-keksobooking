@@ -3,13 +3,23 @@
 window.configureNoticeForm = function () {
   var mapSection = document.querySelector('.map');
   var mainPin = mapSection.querySelector('.map__pin--main');
+  var form = document.querySelector('.notice__form');
 
   var deactivateNoticeForm = function () {
     mapSection.classList.add('map--faded');
-    document.querySelector('.notice__form').classList.add('notice__form--disabled');
+    form.classList.add('notice__form--disabled');
+    form.querySelector('#title').value = '';
+    form.querySelector('#price').value = '';
+    form.querySelector('#description').value = '';
+    var checkboxes = form.querySelectorAll('input[type = "checkbox"]');
+
+    for (var i = 0; i < checkboxes.length; i++) {
+      checkboxes[i].checked = false;
+    }
+
     var noticeFormFieldsets = document.querySelectorAll('.notice__form fieldset');
 
-    for (var i = 0; i < noticeFormFieldsets.length; i++) {
+    for (i = 0; i < noticeFormFieldsets.length; i++) {
       noticeFormFieldsets[i].disabled = true;
     }
 
@@ -99,5 +109,27 @@ window.configureNoticeForm = function () {
   resetBtn.addEventListener('click', function () {
     deactivateNoticeForm();
     window.closeMapCard();
+  });
+
+  // отправка формы
+  var successUploadHandler = function () {
+    deactivateNoticeForm();
+  };
+
+  var errorUploadHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    form.insertAdjacentElement('afterbegin', node);
+  };
+
+  form.addEventListener('submit', function (evt) {
+    evt.preventDefault();
+    window.backend.save(new FormData(form), successUploadHandler, errorUploadHandler);
   });
 };
