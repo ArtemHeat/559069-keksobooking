@@ -25,7 +25,9 @@
       document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
           + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
 
-      window.fillMapPins(document.querySelector('.map__pins'));
+      // window.fillMapPins(document.querySelector('.map__pins'));
+
+      window.backend.load(successLoadHandler, errorLoadHandler);
     }
 
     var startCoord = {
@@ -46,13 +48,7 @@
         y: moveEvt.clientY
       };
 
-      if (moveEvt.clientX < 300) {
-        mainPin.style.left = '300px';
-      } else if (moveEvt.clientX > 900) {
-        mainPin.style.left = '900px';
-      } else {
-        mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
-      }
+      mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
 
       if (moveEvt.clientY < 150) {
         mainPin.style.top = '150px';
@@ -76,4 +72,22 @@
     mapSection.addEventListener('mousemove', onMouseMove);
     document.addEventListener('mouseup', onMouseUp);
   });
+
+  // Загрузка пинов
+
+  var successLoadHandler = function (ads) {
+    window.fillMapPins(document.querySelector('.map__pins'), ads);
+  };
+
+  var errorLoadHandler = function (errorMessage) {
+    var node = document.createElement('div');
+    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style.position = 'absolute';
+    node.style.left = 0;
+    node.style.right = 0;
+    node.style.fontSize = '30px';
+
+    node.textContent = errorMessage;
+    document.body.insertAdjacentElement('afterbegin', node);
+  };
 })();
