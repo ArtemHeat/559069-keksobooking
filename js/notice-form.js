@@ -2,7 +2,7 @@
 
 window.configureNoticeForm = function () {
   var mapSection = document.querySelector('.map');
-  var mainPin = document.querySelector('.map__pin--main');
+  var mainPin = mapSection.querySelector('.map__pin--main');
 
   var deactivateNoticeForm = function () {
     mapSection.classList.add('map--faded');
@@ -12,6 +12,9 @@ window.configureNoticeForm = function () {
     for (var i = 0; i < noticeFormFieldsets.length; i++) {
       noticeFormFieldsets[i].disabled = true;
     }
+
+    mainPin.style.left = 600 + 'px';
+    mainPin.style.top = 375 + 'px';
 
     document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
         + ', ' + (mainPin.offsetTop + mainPin.offsetHeight / 2);
