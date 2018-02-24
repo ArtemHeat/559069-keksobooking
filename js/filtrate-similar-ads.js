@@ -14,6 +14,28 @@ window.filtrateSimilarAds = function () {
   window.similarAds = [];
 
   var updatePins = function () {
+    typeFiltrator = typeSelectValueToTypeFiltrator[form.
+        querySelector('#housing-type').value];
+    priceFiltrator = priceSelectValueToPriceFiltrator[form.
+        querySelector('#housing-price').value];
+    roomFiltrator = roomSelectValueToRoomFiltrator[form.
+        querySelector('#housing-rooms').value];
+    guestFiltrator = guestSelectValueToGuestFiltrator[form.
+        querySelector('#housing-guests').value];
+
+    wifiFiltrator = wifiCheckboxValueToWifiFiltrator[form.
+        querySelector('#filter-wifi').checked];
+    dishwasherFiltrator = dishCheckboxValueToDishFiltrator[form.
+        querySelector('#filter-dishwasher').checked];
+    parkingFiltrator = parkingCheckboxValueToParkingFiltrator[form.
+        querySelector('#filter-parking').checked];
+    washerFiltrator = washerCheckboxValueToWasherFiltrator[form.
+        querySelector('#filter-washer').checked];
+    elevatorFiltrator = elevatorCheckboxValueToElevatorFiltrator[form.
+        querySelector('#filter-elevator').checked];
+    conditionerFiltrator = conderCheckboxValueToConderFiltrator[form.
+        querySelector('#filter-conditioner').checked];
+
     window.fillMapPins(window.similarAds.slice().
         filter(typeFiltrator).filter(priceFiltrator).
         filter(roomFiltrator).filter(guestFiltrator).
@@ -138,28 +160,6 @@ window.filtrateSimilarAds = function () {
     if (evt.target.tagName.toLowerCase() === 'select' ||
       evt.target.tagName.toLowerCase() === 'input'
     ) {
-      typeFiltrator = typeSelectValueToTypeFiltrator[form.
-          querySelector('#housing-type').value];
-      priceFiltrator = priceSelectValueToPriceFiltrator[form.
-          querySelector('#housing-price').value];
-      roomFiltrator = roomSelectValueToRoomFiltrator[form.
-          querySelector('#housing-rooms').value];
-      guestFiltrator = guestSelectValueToGuestFiltrator[form.
-          querySelector('#housing-guests').value];
-
-      wifiFiltrator = wifiCheckboxValueToWifiFiltrator[form.
-          querySelector('#filter-wifi').checked];
-      dishwasherFiltrator = dishCheckboxValueToDishFiltrator[form.
-          querySelector('#filter-dishwasher').checked];
-      parkingFiltrator = parkingCheckboxValueToParkingFiltrator[form.
-          querySelector('#filter-parking').checked];
-      washerFiltrator = washerCheckboxValueToWasherFiltrator[form.
-          querySelector('#filter-washer').checked];
-      elevatorFiltrator = elevatorCheckboxValueToElevatorFiltrator[form.
-          querySelector('#filter-elevator').checked];
-      conditionerFiltrator = conderCheckboxValueToConderFiltrator[form.
-          querySelector('#filter-conditioner').checked];
-
       window.debounce(updatePins);
     }
   });
