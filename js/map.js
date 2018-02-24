@@ -76,7 +76,8 @@
   // Загрузка пинов
 
   var successLoadHandler = function (ads) {
-    window.fillMapPins(document.querySelector('.map__pins'), ads);
+    window.fillMapPins(ads);
+    window.similarAds = ads;
   };
 
   var errorLoadHandler = function (errorMessage) {
@@ -90,4 +91,8 @@
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
   };
+
+  // Фильтр похожих объявлений
+
+  window.filtrateSimilarAds();
 })();

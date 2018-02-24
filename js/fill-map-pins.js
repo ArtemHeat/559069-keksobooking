@@ -18,15 +18,28 @@
     return pin.addEventListener('click', onPinClick);
   };
 
-  window.fillMapPins = function (list, ads) {
+  window.fillMapPins = function (ads) {
+    var mapPins = document.querySelectorAll('.map__pin');
+
+    for (var i = 1; i < mapPins.length; i++) {
+      document.querySelector('.map__pins').removeChild(mapPins[i]);
+    }
+
     var fragment = document.createDocumentFragment();
     var pin;
-    for (var i = 0; i < ads.length; i++) {
+
+    if (ads.length > 5) {
+      var numberOfPins = 5;
+    } else if (ads.length <= 5) {
+      numberOfPins = ads.length;
+    }
+
+    for (i = 0; i < numberOfPins; i++) {
       pin = renderPin(ads[i]);
       setupPinHandler(pin, ads[i]);
       fragment.appendChild(pin);
     }
-    return list.appendChild(fragment);
+    return document.querySelector('.map__pins').appendChild(fragment);
   };
 })();
 
