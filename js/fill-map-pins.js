@@ -28,11 +28,13 @@
     var fragment = document.createDocumentFragment();
     var pin;
 
-    if (ads.length > 5) {
-      var numberOfPins = 5;
-    } else if (ads.length <= 5) {
-      numberOfPins = ads.length;
-    }
+    var numberOfPins = Math.min(5, ads.length);
+
+    // if (ads.length > 5) {
+    //   var numberOfPins = 5;
+    // } else if (ads.length <= 5) {
+    //   numberOfPins = ads.length;
+    // }
 
     for (i = 0; i < numberOfPins; i++) {
       pin = renderPin(ads[i]);

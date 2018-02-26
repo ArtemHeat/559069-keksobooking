@@ -1,50 +1,19 @@
 'use strict';
 window.filtrateSimilarAds = function () {
-  var typeFiltrator;
-  var priceFiltrator;
-  var roomFiltrator;
-  var guestFiltrator;
-  var wifiFiltrator;
-  var dishwasherFiltrator;
-  var parkingFiltrator;
-  var washerFiltrator;
-  var elevatorFiltrator;
-  var conditionerFiltrator;
+  // var typeFiltrator;
+  // var priceFiltrator;
+  // var roomFiltrator;
+  // var guestFiltrator;
+  // var wifiFiltrator;
+  // var dishwasherFiltrator;
+  // var parkingFiltrator;
+  // var washerFiltrator;
+  // var elevatorFiltrator;
+  // var conditionerFiltrator;
   var form = document.querySelector('.map__filters');
   window.similarAds = [];
 
-  var updatePins = function () {
-    typeFiltrator = typeSelectValueToTypeFiltrator[form.
-        querySelector('#housing-type').value];
-    priceFiltrator = priceSelectValueToPriceFiltrator[form.
-        querySelector('#housing-price').value];
-    roomFiltrator = roomSelectValueToRoomFiltrator[form.
-        querySelector('#housing-rooms').value];
-    guestFiltrator = guestSelectValueToGuestFiltrator[form.
-        querySelector('#housing-guests').value];
-
-    wifiFiltrator = wifiCheckboxValueToWifiFiltrator[form.
-        querySelector('#filter-wifi').checked];
-    dishwasherFiltrator = dishCheckboxValueToDishFiltrator[form.
-        querySelector('#filter-dishwasher').checked];
-    parkingFiltrator = parkingCheckboxValueToParkingFiltrator[form.
-        querySelector('#filter-parking').checked];
-    washerFiltrator = washerCheckboxValueToWasherFiltrator[form.
-        querySelector('#filter-washer').checked];
-    elevatorFiltrator = elevatorCheckboxValueToElevatorFiltrator[form.
-        querySelector('#filter-elevator').checked];
-    conditionerFiltrator = conderCheckboxValueToConderFiltrator[form.
-        querySelector('#filter-conditioner').checked];
-
-    window.fillMapPins(window.similarAds.slice().
-        filter(typeFiltrator).filter(priceFiltrator).
-        filter(roomFiltrator).filter(guestFiltrator).
-        filter(wifiFiltrator).filter(dishwasherFiltrator).
-        filter(parkingFiltrator).filter(washerFiltrator).
-        filter(elevatorFiltrator).filter(conditionerFiltrator));
-  };
-
-  var typeSelectValueToTypeFiltrator = {
+  var typeSelectValueToTypeFilter = {
     'any': function () {
       return true;
     },
@@ -59,7 +28,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var priceSelectValueToPriceFiltrator = {
+  var priceSelectValueToPriceFilter = {
     'any': function () {
       return true;
     },
@@ -75,7 +44,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var roomSelectValueToRoomFiltrator = {
+  var roomSelectValueToRoomFilter = {
     'any': function () {
       return true;
     },
@@ -90,7 +59,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var guestSelectValueToGuestFiltrator = {
+  var guestSelectValueToGuestFilter = {
     'any': function () {
       return true;
     },
@@ -102,7 +71,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var wifiCheckboxValueToWifiFiltrator = {
+  var wifiCheckboxValueToWifiFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('wifi') !== -1;
     },
@@ -111,7 +80,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var dishCheckboxValueToDishFiltrator = {
+  var dishCheckboxValueToDishFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('dishwasher') !== -1;
     },
@@ -120,7 +89,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var parkingCheckboxValueToParkingFiltrator = {
+  var parkingCheckboxValueToParkingFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('parking') !== -1;
     },
@@ -129,7 +98,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var washerCheckboxValueToWasherFiltrator = {
+  var washerCheckboxValueToWasherFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('washer') !== -1;
     },
@@ -138,7 +107,7 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var elevatorCheckboxValueToElevatorFiltrator = {
+  var elevatorCheckboxValueToElevatorFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('elevator') !== -1;
     },
@@ -147,13 +116,45 @@ window.filtrateSimilarAds = function () {
     }
   };
 
-  var conderCheckboxValueToConderFiltrator = {
+  var conderCheckboxValueToConderFilter = {
     'true': function (item) {
       return item.offer.features.indexOf('conditioner') !== -1;
     },
     'false': function () {
       return true;
     }
+  };
+
+  var updatePins = function () {
+    var typeFilter = typeSelectValueToTypeFilter[form.
+        querySelector('#housing-type').value];
+    var priceFilter = priceSelectValueToPriceFilter[form.
+        querySelector('#housing-price').value];
+    var roomFilter = roomSelectValueToRoomFilter[form.
+        querySelector('#housing-rooms').value];
+    var guestFilter = guestSelectValueToGuestFilter[form.
+        querySelector('#housing-guests').value];
+
+    var wifiFilter = wifiCheckboxValueToWifiFilter[form.
+        querySelector('#filter-wifi').checked];
+    var dishwasherFilter = dishCheckboxValueToDishFilter[form.
+        querySelector('#filter-dishwasher').checked];
+    var parkingFilter = parkingCheckboxValueToParkingFilter[form.
+        querySelector('#filter-parking').checked];
+    var washerFilter = washerCheckboxValueToWasherFilter[form.
+        querySelector('#filter-washer').checked];
+    var elevatorFilter = elevatorCheckboxValueToElevatorFilter[form.
+        querySelector('#filter-elevator').checked];
+    var conditionerFilter = conderCheckboxValueToConderFilter[form.
+        querySelector('#filter-conditioner').checked];
+
+    var allFilters = function (item) {
+      return typeFilter(item) && priceFilter(item) && roomFilter(item) &&
+        guestFilter(item) && wifiFilter(item) && dishwasherFilter(item) &&
+        parkingFilter(item) && washerFilter(item) && elevatorFilter(item) && conditionerFilter(item);
+    };
+
+    window.fillMapPins(window.similarAds.slice().filter(allFilters));
   };
 
   form.addEventListener('change', function (evt) {
