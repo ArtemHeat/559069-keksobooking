@@ -3,136 +3,111 @@ window.filtrateSimilarAds = function () {
   var form = document.querySelector('.map__filters');
   window.similarAds = [];
 
-  var typeSelectValue = form.querySelector('#housing-type');
-  var priceSelectValue = form.querySelector('#housing-price');
-  var roomSelectValue = form.querySelector('#housing-rooms');
-  var guestSelectValue = form.querySelector('#housing-guests');
+  var typeSelect = form.querySelector('#housing-type');
+  var priceSelect = form.querySelector('#housing-price');
+  var roomSelect = form.querySelector('#housing-rooms');
+  var guestSelect = form.querySelector('#housing-guests');
 
-  var wifiCheckboxValue = form.querySelector('#filter-wifi');
-  var dishCheckboxValue = form.querySelector('#filter-dishwasher');
-  var parkingCheckboxValue = form.querySelector('#filter-parking');
-  var washerCheckboxValue = form.querySelector('#filter-washer');
-  var elevatorCheckboxValue = form.querySelector('#filter-elevator');
-  var conditionerCheckboxValue = form.querySelector('#filter-conditioner');
+  var wifiCheckbox = form.querySelector('#filter-wifi');
+  var dishwasherCheckbox = form.querySelector('#filter-dishwasher');
+  var parkingCheckbox = form.querySelector('#filter-parking');
+  var washerCheckbox = form.querySelector('#filter-washer');
+  var elevatorCheckbox = form.querySelector('#filter-elevator');
+  var conditionerCheckbox = form.querySelector('#filter-conditioner');
 
-  var typeFilter = function (value) {
-    return function (item) {
-      if (value === 'any') {
-        return true;
-      } else {
-        return item.offer.type === value;
-      }
-    };
+  var typeFilter = function (item) {
+    if (typeSelect.value === 'any') {
+      return true;
+    } else {
+      return item.offer.type === typeSelect.value;
+    }
   };
 
-  var priceFilter = function (value) {
-    return function (item) {
-      if (value === 'any') {
-        return true;
-      } else if (value === 'middle') {
-        return item.offer.price > 10000 && item.offer.price < 50000;
-      } else if (value === 'low') {
-        return item.offer.price < 10000;
-      } else {
-        return item.offer.price >= 50000;
-      }
-    };
+  var priceFilter = function (item) {
+    if (priceSelect.value === 'any') {
+      return true;
+    } else if (priceSelect.value === 'middle') {
+      return item.offer.price > 10000 && item.offer.price < 50000;
+    } else if (priceSelect.value === 'low') {
+      return item.offer.price < 10000;
+    } else {
+      return item.offer.price >= 50000;
+    }
   };
 
-  var roomFilter = function (value) {
-    return function (item) {
-      if (value === 'any') {
-        return true;
-      } else {
-        return item.offer.rooms === +value;
-      }
-    };
+  var roomFilter = function (item) {
+    if (roomSelect.value === 'any') {
+      return true;
+    } else {
+      return item.offer.rooms === +roomSelect.value;
+    }
   };
 
-  var guestFilter = function (value) {
-    return function (item) {
-      if (value === 'any') {
-        return true;
-      } else {
-        return item.offer.guests === +value;
-      }
-    };
+  var guestFilter = function (item) {
+    if (guestSelect.value === 'any') {
+      return true;
+    } else {
+      return item.offer.guests === +guestSelect.value;
+    }
   };
 
-  var wifiFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('wifi') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var wifiFilter = function (item) {
+    if (wifiCheckbox.checked === true) {
+      return item.offer.features.indexOf('wifi') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var dishwasherFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('dishwasher') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var dishwasherFilter = function (item) {
+    if (dishwasherCheckbox.checked === true) {
+      return item.offer.features.indexOf('dishwasher') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var parkingFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('parking') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var parkingFilter = function (item) {
+    if (parkingCheckbox.checked === true) {
+      return item.offer.features.indexOf('parking') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var washerFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('washer') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var washerFilter = function (item) {
+    if (washerCheckbox.checked === true) {
+      return item.offer.features.indexOf('washer') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var elevatorFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('elevator') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var elevatorFilter = function (item) {
+    if (elevatorCheckbox.checked === true) {
+      return item.offer.features.indexOf('elevator') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var conditionerFilter = function (value) {
-    return function (item) {
-      if (value === 'true') {
-        return item.offer.features.indexOf('conditioner') !== -1;
-      } else {
-        return true;
-      }
-    };
+  var conditionerFilter = function (item) {
+    if (conditionerCheckbox.checked === true) {
+      return item.offer.features.indexOf('conditioner') !== -1;
+    } else {
+      return true;
+    }
   };
 
-  var allFilters = function (value1, value2, value3, value4, value5,
-      value6, value7, value8, value9, value10) {
-    return typeFilter(value1) && priceFilter(value2) && roomFilter(value3) &&
-        guestFilter(value4) && wifiFilter(value5) && dishwasherFilter(value6) &&
-        parkingFilter(value7) && washerFilter(value8) && elevatorFilter(value9) &&
-        conditionerFilter(value10);
+  var allFilters = function (item) {
+    return typeFilter(item) && priceFilter(item) && roomFilter(item) &&
+        guestFilter(item) && wifiFilter(item) && dishwasherFilter(item) &&
+        parkingFilter(item) && washerFilter(item) && elevatorFilter(item) &&
+        conditionerFilter(item);
   };
 
   var updatePins = function () {
-
-    window.fillMapPins(window.similarAds.slice().filter(allFilters(typeSelectValue.value,
-        priceSelectValue.value, roomSelectValue.value, guestSelectValue.value, wifiCheckboxValue.checked,
-        dishCheckboxValue.checked, parkingCheckboxValue.checked, washerCheckboxValue.checked,
-        elevatorCheckboxValue.checked, conditionerCheckboxValue.checked)));
+    window.fillMapPins(window.similarAds.slice().filter(allFilters));
   };
 
   form.addEventListener('change', function (evt) {
