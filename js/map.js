@@ -25,8 +25,6 @@
       document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
           + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
 
-      // window.fillMapPins(document.querySelector('.map__pins'));
-
       window.backend.load(successLoadHandler, errorLoadHandler);
     }
 

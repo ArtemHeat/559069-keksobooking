@@ -26,12 +26,12 @@
     'house',
     'bungalo'
   ];
-  var CHECKIN_TIME = [
+  var CHECKIN_TIMES = [
     '12:00',
     '13:00',
     '14:00'
   ];
-  var CHECKOUT_TIME = [
+  var CHECKOUT_TIMES = [
     '12:00',
     '13:00',
     '14:00'
@@ -90,8 +90,8 @@
         type: getRandomData(TYPES),
         rooms: getRandomNumber(MIN_ROOMS, MAX_ROOMS),
         guests: getRandomNumber(MIN_GUESTS, MAX_GUESTS),
-        checkin: getRandomData(CHECKIN_TIME),
-        checkout: getRandomData(CHECKOUT_TIME),
+        checkin: getRandomData(CHECKIN_TIMES),
+        checkout: getRandomData(CHECKOUT_TIMES),
         features: ALL_FEATURES.slice().sort(sortRandom).splice(0,
             getRandomNumber(0, ALL_FEATURES.length)),
         description: '',
