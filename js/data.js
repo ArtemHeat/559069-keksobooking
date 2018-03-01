@@ -26,12 +26,12 @@
     'house',
     'bungalo'
   ];
-  var CHECKIN_TIME = [
-    '12:00',
+  var CHECKIN_TIMES = [
+    '12:00'
     '13:00',
     '14:00'
   ];
-  var CHECKOUT_TIME = [
+  var CHECKOUT_TIMES = [
     '12:00',
     '13:00',
     '14:00'
