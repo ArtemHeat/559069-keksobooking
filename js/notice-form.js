@@ -119,13 +119,18 @@ window.configureNoticeForm = function () {
   var errorUploadHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
+    node.style.position = 'fixed';
+    node.style.top = '50%';
     node.style.left = 0;
     node.style.right = 0;
-    node.style.fontSize = '30px';
+    node.style.fontSize = '40px';
 
     node.textContent = errorMessage;
-    form.insertAdjacentElement('afterbegin', node);
+    document.body.insertAdjacentElement('afterbegin', node);
+    var removeNode = function () {
+      document.body.removeChild(node);
+    };
+    setTimeout(removeNode, 10000);
   };
 
   form.addEventListener('submit', function (evt) {

@@ -114,6 +114,7 @@ window.filtrateSimilarAds = function () {
     if (evt.target.tagName.toLowerCase() === 'select' ||
       evt.target.tagName.toLowerCase() === 'input'
     ) {
+      window.closeMapCard();
       window.debounce(updatePins);
     }
   });

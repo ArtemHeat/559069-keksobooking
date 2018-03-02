@@ -85,6 +85,11 @@
     mapCard.querySelector('.popup__features + p').textContent = ad.offer.description;
     fillPhotoList(mapCard.querySelector('.popup__pictures'), ad.offer.photos);
     mapCard.querySelector('.popup__avatar').src = ad.author.avatar;
+
+    if (mapCard.querySelector('.popup__features').innerHTML === '') {
+      mapCard.removeChild(mapCard.querySelector('.popup__features'));
+    }
+
     return mapCard;
   };
 })();

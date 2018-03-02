@@ -36,6 +36,8 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
+      console.log(startCoord);
+
       var shift = {
         x: startCoord.x - moveEvt.clientX,
         y: startCoord.y - moveEvt.clientY
@@ -46,18 +48,22 @@
         y: moveEvt.clientY
       };
 
-      mainPin.style.left = (mainPin.offsetLeft - shift.x) + 'px';
+      if (moveEvt.clientX <= 1200) {
+        mainPin.style.left = Math.max(0, (mainPin.offsetLeft - shift.x)) + 'px';
+      } else {
+        mainPin.style.left = Math.min(1200, (mainPin.offsetLeft - shift.x)) + 'px';
+      }
 
-      if (moveEvt.clientY < 150) {
+      if (moveEvt.pageY < 150) {
         mainPin.style.top = '150px';
-      } else if (moveEvt.clientY > 500) {
+      } else if (moveEvt.pageY > 500) {
         mainPin.style.top = '500px';
       } else {
         mainPin.style.top = (mainPin.offsetTop - shift.y) + 'px';
       }
 
-      document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
-          + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
+      document.querySelector('#address').value = mainPin.offsetLeft
+          + ', ' + mainPin.offsetTop;
     };
 
     var onMouseUp = function (upEvt) {
@@ -81,13 +87,19 @@
   var errorLoadHandler = function (errorMessage) {
     var node = document.createElement('div');
     node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
-    node.style.position = 'absolute';
+    node.style.position = 'fixed';
+    node.style.top = 0;
     node.style.left = 0;
     node.style.right = 0;
     node.style.fontSize = '30px';
 
+
     node.textContent = errorMessage;
     document.body.insertAdjacentElement('afterbegin', node);
+    var removeNode = function () {
+      document.body.removeChild(node);
+    };
+    setTimeout(removeNode, 10000);
   };
 
   // Фильтр похожих объявлений
