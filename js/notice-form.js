@@ -43,23 +43,21 @@ window.configureNoticeForm = function () {
   var typeSelect = noticeForm.querySelector('#type');
   var priceInput = noticeForm.querySelector('#price');
 
-  var setPriceMinVal = function () {
+  var onTypeSelectChange = function () {
     if (typeSelect.value === 'bungalo') {
-      return '0';
+      priceInput.min = '0';
     } else if (typeSelect.value === 'flat') {
-      return '1000';
+      priceInput.min = '1000';
     } else if (typeSelect.value === 'house') {
-      return '5000';
-    } else {
-      return '10000';
+      priceInput.min = '5000';
+    } else if (typeSelect.value === 'palace') {
+      priceInput.min = '10000';
     }
   };
 
-  priceInput.min = setPriceMinVal();
+  onTypeSelectChange();
 
-  typeSelect.addEventListener('change', function () {
-    priceInput.min = setPriceMinVal();
-  });
+  typeSelect.addEventListener('change', onTypeSelectChange);
 
   var roomNumberSelect = noticeForm.querySelector('#room_number');
   var capacitySelect = noticeForm.querySelector('#capacity');
