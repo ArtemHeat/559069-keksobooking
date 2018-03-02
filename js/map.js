@@ -36,8 +36,6 @@
     var onMouseMove = function (moveEvt) {
       moveEvt.preventDefault();
 
-      console.log(startCoord);
-
       var shift = {
         x: startCoord.x - moveEvt.clientX,
         y: startCoord.y - moveEvt.clientY
