@@ -57,7 +57,7 @@ window.configureNoticeForm = function () {
 
   priceInput.min = setPriceMinVal();
 
-  typeSelect.addEventListener('click', function () {
+  typeSelect.addEventListener('change', function () {
     priceInput.min = setPriceMinVal();
   });
 
@@ -83,10 +83,10 @@ window.configureNoticeForm = function () {
 
   sayWrongCapacity();
 
-  capacitySelect.addEventListener('click', function () {
+  capacitySelect.addEventListener('change', function () {
     sayWrongCapacity();
   });
-  roomNumberSelect.addEventListener('click', function () {
+  roomNumberSelect.addEventListener('change', function () {
     sayWrongCapacity();
   });
 
@@ -101,8 +101,8 @@ window.configureNoticeForm = function () {
     timeIn.value = timeOut.value;
   };
 
-  timeIn.addEventListener('click', onTimeInClick);
-  timeOut.addEventListener('click', onTimeOutClick);
+  timeIn.addEventListener('change', onTimeInClick);
+  timeOut.addEventListener('change', onTimeOutClick);
 
   var resetBtn = noticeForm.querySelector('.form__reset');
 
