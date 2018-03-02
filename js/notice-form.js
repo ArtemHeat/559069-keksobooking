@@ -45,20 +45,20 @@ window.configureNoticeForm = function () {
 
   var setPriceMinVal = function () {
     if (typeSelect.value === 'bungalo') {
-      priceInput.min = '0';
+      return '0';
     } else if (typeSelect.value === 'flat') {
-      priceInput.min = '1000';
+      return '1000';
     } else if (typeSelect.value === 'house') {
-      priceInput.min = '5000';
-    } else if (typeSelect.value === 'palace') {
-      priceInput.min = '10000';
+      return '5000';
+    } else {
+      return '10000';
     }
   };
 
-  setPriceMinVal();
+  priceInput.min = setPriceMinVal();
 
   typeSelect.addEventListener('click', function () {
-    setPriceMinVal();
+    priceInput.min = setPriceMinVal();
   });
 
   var roomNumberSelect = noticeForm.querySelector('#room_number');
