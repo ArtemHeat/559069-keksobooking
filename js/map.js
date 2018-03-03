@@ -20,8 +20,6 @@
         noticeFormFieldsets[i].disabled = false;
       }
 
-      document.querySelector('#address').disabled = true;
-
       document.querySelector('#address').value = (mainPin.offsetLeft + mainPin.offsetWidth / 2)
           + ', ' + (mainPin.offsetTop + mainPin.offsetHeight);
 

@@ -116,9 +116,10 @@ window.configureNoticeForm = function () {
 
   var errorUploadHandler = function (errorMessage) {
     var node = document.createElement('div');
-    node.style = 'z-index: 100; margin: 0 auto; text-align: center; background-color: red;';
+    node.style = 'z-index: 100; margin: 60 auto; text-align: center;'
+      + 'background-color: white; color: #A9A9A9; border: 8px ridge #C0C0C0;';
     node.style.position = 'fixed';
-    node.style.top = '50%';
+    node.style.top = 0;
     node.style.left = 0;
     node.style.right = 0;
     node.style.fontSize = '40px';
